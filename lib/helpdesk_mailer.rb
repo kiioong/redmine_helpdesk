@@ -53,7 +53,7 @@ class HelpdeskMailer < ActionMailer::Base
         :reply_to => sender.present? && sender || Setting.mail_from,
         :to       => recipient,
         :subject  => subject,
-        :body     => "#{text}\n\n#{footer}".gsub("##issue-id##", issue.id.to_s),
+        :body     => "#{Setting.emails_header.to_s}\n\n#{text}\n\n#{footer}".gsub("##issue-id##", issue.id.to_s),
         :date     => Time.zone.now
       )
     elsif reply.present?
@@ -63,7 +63,7 @@ class HelpdeskMailer < ActionMailer::Base
         :reply_to => sender.present? && sender || Setting.mail_from,
         :to       => recipient,
         :subject  => subject,
-        :body     => "#{reply}\n\n#{footer}".gsub("##issue-id##", issue.id.to_s),
+        :body     => "#{Setting.emails_header.to_s}\n\n#{reply}\n\n#{footer}".gsub("##issue-id##", issue.id.to_s),
         :date     => Time.zone.now
       )
     else
